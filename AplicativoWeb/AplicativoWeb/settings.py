@@ -52,13 +52,13 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'AplicativoWeb.urls'
 
-joaquin = "C:/Users/joaco/Desktop/CC/FP final/FP-Project/AplicativoWeb/Modulos/Academica/plantillas"
-general = "C:/AplicativoWeb/Modulos/Academica/plantillas"
+joaquin = "C:/Users/joaco/Desktop/CC/FP final/FP-Project/AplicativoWeb/Modulos/Academica/Templates"
+general = "C:/AplicativoWeb/Modulos/Academica/Templates"
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [joaquin],#esto solo funciona porque yo lo tengo puesto si quieres visualizarlo cambialo a tu directorio
+        'DIRS': [BASE_DIR / 'Templates'],#esto solo funciona porque yo lo tengo puesto si quieres visualizarlo cambialo a tu directorio
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
