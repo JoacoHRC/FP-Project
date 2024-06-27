@@ -14,3 +14,6 @@ def contactar (request):
         return render(request , "contactoExitoso.html")
     return render(request , "formularioContacto.html")
 
+
+def index(request):
+    return render(request, "index.html")
