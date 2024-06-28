@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from Modulos.Academica.views import formularioContacto ,contactar
 
+# URL general
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('formularioContacto/',formularioContacto),

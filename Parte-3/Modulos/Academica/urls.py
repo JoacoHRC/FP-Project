@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 
+
+# URL que se ven en el navegador y las vistas que referencian
 urlpatterns = [
     path('', views.index, name='index'),
     path('contacto/', views.contactar, name='contactar'),
