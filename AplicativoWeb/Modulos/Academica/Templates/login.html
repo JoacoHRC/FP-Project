@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h2>Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <a href="{% url 'register' %}">Tienes una cuenta? Inicia aqui</a>
+    <a href="{% url 'index' %}">Volver al Inicio</a>
+</body>
+</html>

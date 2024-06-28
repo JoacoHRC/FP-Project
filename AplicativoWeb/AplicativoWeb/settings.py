@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Modulos.Academica'
+    'Modulos.Academica',
+    
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ general = "C:/AplicativoWeb/Modulos/Academica/Templates"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'Templates'],#esto solo funciona porque yo lo tengo puesto si quieres visualizarlo cambialo a tu directorio
+        'DIRS': [BASE_DIR / 'Templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

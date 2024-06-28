@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Task List</title>
+</head>
+<body>
+    <h2>Your Tasks</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Agregar Tarea</button>
+    </form>
+    <ul>
+        {% for task in tasks %}
+            <li>
+                <form method="post" action="{% url 'update_task' task.id %}">
+                    {% csrf_token %}
+                    <input type="checkbox" name="completed" onchange="this.form.submit()" {% if task.completed %}checked{% endif %}>
+                    {{ task.description }}
+                </form>
+                <form method="post" action="{% url 'delete_task' task.id %}">
+                    {% csrf_token %}
+                    <button type="submit">Borrar</button>
+                </form>
+                <form method="post" action="{% url 'edit_task' task.id %}">
+                    {% csrf_token %}
+                    <input type="text" name="new_description" placeholder="Nueva descripción">
+                    <button type="submit">Editar</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+    
+    <div style="margin-top: 20px;">
+        <a href="{% url 'index' %}">Volver al Inicio</a>
+    </div>
+</body>
+</html>
+
+
