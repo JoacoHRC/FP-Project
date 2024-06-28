@@ -8,6 +8,7 @@ from .forms import TaskForm, UpdateTaskForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.forms import AuthenticationForm
 
+# DIRECCIONES a las que se referencian los hrefs
 
 def register(request):
     if request.method == 'POST':
@@ -18,7 +19,7 @@ def register(request):
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=raw_password)
             login(request, user)
-            return redirect('task_list')  # Redirige a la lista de tareas después de registrarse
+            return redirect('index')  # Redirige a la lista de tareas después de registrarse
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form})
@@ -32,14 +33,14 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('task_list')  # Redirige a la lista de tareas después de iniciar sesión
+                return redirect('index')  # Redirige a la lista de tareas después de iniciar sesión
     else:
         form = AuthenticationForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'index.html', {'form': form})
 
 def logout_view(request):
     logout(request)
-    return redirect('login')  
+    return redirect('index')  
 
 def formularioContacto(request):
     return render (request ,"formularioContacto.html")
@@ -55,7 +56,11 @@ def contactar (request):
 
 
 def index(request):
-    return render(request, "index.html")
+    if request.user.is_authenticated:
+        return task_list(request)
+    else:
+        return login_view(request)
+    
 
 @login_required
 def task_list(request):
@@ -66,10 +71,10 @@ def task_list(request):
             task = form.save(commit=False)
             task.student = request.user
             task.save()
-            return redirect('task_list')
+            return redirect('index')
     else:
         form = TaskForm()
-    return render(request, 'task_list.html', {'tasks': tasks, 'form': form})
+    return render(request, 'index.html', {'tasks': tasks, 'form': form})
 
 @login_required
 def update_task(request, task_id):
@@ -78,10 +83,10 @@ def update_task(request, task_id):
         form = UpdateTaskForm(request.POST, instance=task)
         if form.is_valid():
             form.save()
-            return redirect('task_list')
+            return redirect('index')
     else:
         form = UpdateTaskForm(instance=task)
-    return render(request, 'update_task.html', {'form': form, 'task': task})
+    # return render(request, 'update_task.html', {'form': form, 'task': task})
 
 @login_required
 def edit_task(request, task_id):
@@ -91,15 +96,15 @@ def edit_task(request, task_id):
         if new_description:
             task.description = new_description
             task.save()
-        return redirect('task_list')
-    else:
-       
-        return redirect('task_list')
+        return redirect('index')
+    else:       
+        return redirect('index')
+
 
 @login_required
 def delete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id, student=request.user)
     if request.method == 'POST':
         task.delete()
-        return redirect('task_list')
-    return render(request, 'delete_task.html', {'task': task})
+        return redirect('index')
+    # return render(request, 'delete_task.html', {'task': task})

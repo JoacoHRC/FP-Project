@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+# DATABASE DE LAS TAREAS
 class Task(models.Model):
     description = models.CharField(max_length=255)
     completed = models.BooleanField(default=False)
@@ -9,6 +10,7 @@ class Task(models.Model):
     def __str__(self):
         return self.description
 
+# DATABASES que no se usaron en la funcionalidad del aplicativo, uso didactico
 class Carrera(models.Model):
     codigo = models.CharField(max_length=3, primary_key=True)
     nombre = models.CharField(max_length=50)
