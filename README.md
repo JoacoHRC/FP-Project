@@ -2,5 +2,5 @@
 Repositorio del proyecto final de Fundamentos de Programación
 
 * Ramirez Caruajulca Joaquin
-* Becerra Balvin Marco
+* Martel Balvin Isaac
 * Cruz Sandiga Luigui
